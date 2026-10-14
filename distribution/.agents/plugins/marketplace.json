@@ -1,0 +1,10 @@
+{
+  "name": "codex-island-local",
+  "interface": {"displayName": "Codex Island"},
+  "plugins": [{
+    "name": "codex-island",
+    "source": {"source": "local", "path": "./plugins/codex-island"},
+    "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+    "category": "Productivity"
+  }]
+}

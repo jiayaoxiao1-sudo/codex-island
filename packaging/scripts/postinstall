@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+login_user=$(/usr/bin/stat -f '%Su' /dev/console)
+if [[ "$login_user" == "root" || "$login_user" == "loginwindow" || -z "$login_user" ]]; then
+  echo "文件已安装。请登录桌面后运行 /Library/Application Support/Codex Island Installer/完成用户配置.command。"
+  exit 0
+fi
+login_uid=$(/usr/bin/id -u "$login_user")
+helper="/Library/Application Support/Codex Island Installer/install.py"
+if ! /bin/launchctl asuser "$login_uid" /usr/bin/sudo -H -u "$login_user" /usr/bin/env PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/homebrew/bin" /usr/bin/python3 "$helper" --prebuilt; then
+  echo "应用文件已安装，但用户配置尚未完成。请确认已安装 Codex，然后运行完成用户配置.command。" >&2
+fi
+exit 0

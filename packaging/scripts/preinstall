@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+if [[ "$3" != "/" ]]; then
+  echo "Codex Island 必须安装到当前启动磁盘。" >&2
+  exit 1
+fi
+if ! /usr/bin/xcode-select -p >/dev/null 2>&1; then
+  echo "请先安装 Apple Command Line Tools：在终端运行 xcode-select --install，然后重新打开安装包。监控器需要其中的 Python 3。" >&2
+  exit 1
+fi
+if ! /usr/bin/python3 -c 'import sys; assert sys.version_info >= (3, 9)' >/dev/null 2>&1; then
+  echo "未找到可用的 Apple Python 3.9+。请修复 Command Line Tools 后重试。" >&2
+  exit 1
+fi

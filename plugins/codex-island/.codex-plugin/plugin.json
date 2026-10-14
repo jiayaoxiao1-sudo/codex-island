@@ -1,0 +1,7 @@
+{
+  "name": "codex-island",
+  "version": "2.8.0",
+  "description": "像素灵动岛：用量、运行任务和工作状态动画",
+  "hooks": "./hooks/hooks.json",
+  "skills": "./skills/"
+}

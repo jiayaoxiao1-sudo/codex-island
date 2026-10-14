@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="2">
+  <title>Codex Island 2.4</title>
+  <options customize="never" require-scripts="true" hostArchitectures="arm64,x86_64"/>
+  <domains enable_anywhere="false" enable_currentUserHome="false" enable_localSystem="true"/>
+  <welcome file="Welcome.html" mime-type="text/html"/>
+  <conclusion file="Conclusion.html" mime-type="text/html"/>
+  <installation-check script="checkOS()"/>
+  <script><![CDATA[
+    function checkOS() {
+      if (system.compareVersions(system.version.ProductVersion, '13.0') < 0) {
+        my.result.title = '需要 macOS 13 或以上';
+        my.result.message = '请在兼容的 Mac 上安装 Codex Island。';
+        my.result.type = 'Fatal';
+        return false;
+      }
+      return true;
+    }
+  ]]></script>
+  <choices-outline><line choice="default"/></choices-outline>
+  <choice id="default" visible="false"><pkg-ref id="local.codex.island.installer"/></choice>
+  <pkg-ref id="local.codex.island.installer" version="2.4" onConclusion="none">Codex-Island-component.pkg</pkg-ref>
+</installer-gui-script>
